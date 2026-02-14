@@ -1,0 +1,3 @@
+Either through cloning with git or by using npm (the recommended way):
+
+npm install -g nodemon # or using yarn: yarn global add nodemon
