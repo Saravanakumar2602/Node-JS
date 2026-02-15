@@ -96,6 +96,54 @@ app.post("/api/users",(req,res)=>{
     return res.status(201).send(newUser);
 })
 
+app.post("/api/products",(req,res)=>{
+    console.log(req.body); 
+    const {body} = req;
+    const newUser = {id:products[products.length-1].id+1,...body};
+    products.push(newUser);
+    return res.status(201).send(newUser);
+})
+
+app.put("/api/users/:id",(req,res)=>{
+    const id = parseInt(req.params.id);
+
+    if (isNaN(id)) {
+        return res.status(400).send({ msg: "Bad Request, Invalid ID" });
+    }
+
+    const userIndex = users.findIndex((user) => user.id === id);
+
+    if (userIndex===-1) {
+
+        return res.status(404).send({ msg: "user not found" });
+    }
+
+    const {body} = req;
+    users[userIndex] = {id:id,...body};
+    return res.status(200).send({msg:"User Updated"});
+})
+
+app.put("/api/products/:id",(req,res)=>{
+    const id = parseInt(req.params.id);
+
+    if (isNaN(id)) {
+        return res.status(400).send({ msg: "Bad Request, Invalid ID" });
+    }
+
+    const userIndex = products.findIndex((user) => user.id === id);
+
+    if (userIndex===-1) {
+
+        return res.status(404).send({ msg: "user not found" });
+    }
+
+    const {body} = req;
+    products[userIndex] = {id:id,...body};
+    return res.status(200).send({msg:"User Updated"});
+})
+
 app.listen(PORT, () => {
     console.log(`App is running on Port ${PORT}`);
 });
+
+
