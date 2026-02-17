@@ -9,7 +9,6 @@ const router = Router();
 
 
 
-
 router.get("/api/users", (req, res) => {
 
     if(req.signedCookies.user && req.signedCookies.user == "sachit" ){
